@@ -1,28 +1,54 @@
 <template>
-  <div id="app">
-    <img alt="Vue logo" src="./assets/logo.png">
-    <HelloWorld msg="Welcome to Your Vue.js App"/>
-  </div>
+  <main>
+    <password v-model="password"
+      :toggle="true"/>
+  </main>
 </template>
 
 <script>
-import HelloWorld from './components/HelloWorld.vue'
+import Password from 'vue-password-strength-meter'
+import Generator from 'wordgenie'
+
+const sourceWords = [
+  'monday',
+  'tuesday',
+  'wednesday',
+  'wedding',
+  'dingo',
+  'demon',
+  'daylight',
+  'sunlight',
+  'lighthouse'
+]
+let source = new Set(sourceWords)
+let generator = new Generator()
+generator.analyze(source)
 
 export default {
-  name: 'app',
-  components: {
-    HelloWorld
+  data: () => ({
+    password: this.generate()
+  }),
+  components: { Password },
+  methods: {
+    generate () {
+      this.password = generator.genWord()
+    }
   }
 }
 </script>
 
 <style lang="scss">
-#app {
-  font-family: 'Avenir', Helvetica, Arial, sans-serif;
+main {
+  font-family: 'SFMono-Regular', Menlo, Consolas, 'Liberation Mono', Courier, monospace;
   -webkit-font-smoothing: antialiased;
   -moz-osx-font-smoothing: grayscale;
   text-align: center;
-  color: #2c3e50;
-  margin-top: 60px;
+  color: #223;
+  margin: 3rem auto;
+  width: 94%;
+  max-width: 45rem;
+  padding: 5rem;
+  background-color: cornflowerblue;
+  border-radius: .25rem;
 }
 </style>
