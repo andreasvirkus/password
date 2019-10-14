@@ -13,6 +13,14 @@ Be safe out there 🖖
 
 ----
 
+## TODO
+
+- Maybe swap out `wordgenie` for [instagrammar](https://www.npmjs.com/package/instagrammar), since its grammar
+syntatic rules would allow us to generate more memorable passwords in the form of
+```
+[noun]-[verb]-[adjective]-[noun]
+```
+
 ## Project setup
 ```
 npm install
