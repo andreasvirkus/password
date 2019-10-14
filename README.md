@@ -1,5 +1,18 @@
 # password
 
+This generator uses [wordgenie](https://npm) to generate a password of `N` words
+and [zxcvbn]() to test that password's strength.
+
+I use this generator when I need a password that I cannot store in a password
+manager (e.g. a new master password for 1Password, LastPass, Dashlane, etc.)
+
+I'll soon add options to change the source pool of words, the number of
+words to be generated and a custom separator (i.e. `%`, `|` instead of `-`)
+
+Be safe out there 🖖
+
+----
+
 ## Project setup
 ```
 npm install
