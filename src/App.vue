@@ -1,7 +1,11 @@
 <template>
   <main>
-    <password v-model="password"
-      :toggle="true"/>
+    <div class="suggestion">
+      <input type="text" v-model="password" ref="field">
+      <button @click="generate" type="button">🔄</button>
+    </div>
+
+    <password v-model="password" :strength-meter-only="true"/>
   </main>
 </template>
 
@@ -18,20 +22,37 @@ const sourceWords = [
   'demon',
   'daylight',
   'sunlight',
-  'lighthouse'
+  'lighthouse',
+  'dog',
+  'bone',
+  'graveyard',
+  'church',
+  'plant',
+  'tree'
 ]
 let source = new Set(sourceWords)
 let generator = new Generator()
 generator.analyze(source)
 
+// TODO: Consider using instagrammar instead of wordgenie?
 export default {
-  data: () => ({
-    password: this.generate()
-  }),
+  name: 'generator',
+  data () {
+    return {
+      password: '',
+      separator: '-'
+    }
+  },
   components: { Password },
+  async mounted () {
+    await this.$nextTick()
+    this.generate()
+  },
   methods: {
     generate () {
-      this.password = generator.genWord()
+      const words = generator.genSet(3)
+      this.password = Array.from(words).join(this.separator)
+      this.$refs.field.focus()
     }
   }
 }
@@ -46,9 +67,33 @@ main {
   color: #223;
   margin: 3rem auto;
   width: 94%;
-  max-width: 45rem;
-  padding: 5rem;
-  background-color: cornflowerblue;
+  max-width: 25rem;
   border-radius: .25rem;
+}
+.suggestion {
+  margin-bottom: 1.5rem;
+  display: flex;
+  align-items: center;
+  justify-content: space-between;
+  margin-top: .5rem;
+
+  button {
+    background: none;
+    border: none;
+    padding: .5rem .75rem;
+    border-radius: 4px;
+    color: #333;
+    font-size: 1rem;
+  }
+  input {
+    display: block;
+    background-color: #f1f1f1;
+    border: 1px solid #f1f1f1;
+    border-radius: 2px;
+    box-sizing: border-box;
+    font-size: 14px;
+    padding: 13px;
+    width: calc(100% - 3rem);
+  }
 }
 </style>
