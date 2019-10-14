@@ -1,7 +1,7 @@
 # password
 
-This generator uses [wordgenie](https://npm) to generate a password of `N` words
-and [zxcvbn]() to test that password's strength.
+This generator uses [wordgenie](https://www.npmjs.com/package/wordgenie) to generate a password of `N` words
+and Dropbox's [zxcvbn](https://github.com/dropbox/zxcvbn) to test that password's strength.
 
 I use this generator when I need a password that I cannot store in a password
 manager (e.g. a new master password for 1Password, LastPass, Dashlane, etc.)
